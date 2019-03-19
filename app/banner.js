@@ -8,6 +8,11 @@ module.exports = function (app) {
   app.use(function (request, response, next) {
     let cookie = request.cookies[BANNER_COOKIE_NAME]
 
+    if (request.query.hide_banner === 'yes') {
+      app.locals.shouldShowAppBanner = false
+      return next()
+    }
+
     if (cookie === 'yes') {
       app.locals.shouldShowAppBanner = false
       return next()
