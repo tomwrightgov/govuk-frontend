@@ -3,11 +3,54 @@
 @import "../../helpers/all";
 
 @include govuk-exports("govuk/component/button") {
-
-  $govuk-button-colour: #00823b;
-  $govuk-button-hover-colour: darken($govuk-button-colour, 5%);
-  $govuk-button-shadow-colour: darken($govuk-button-colour, 15%);
+  // Primary button variables
+  $govuk-button-colour: #00823b; // sass-lint:disable no-color-literals
+  $govuk-button-hover-colour: shade($govuk-button-colour, 20%);
+  $govuk-button-shadow-colour: shade($govuk-button-colour, 60%);
   $govuk-button-text-colour: govuk-colour("white");
+
+  // Primary (alt) button variables
+  $govuk-alt-button-colour: govuk-colour("white");
+  $govuk-alt-button-border-colour: $govuk-button-colour;
+  $govuk-alt-button-hover-colour: tint($govuk-alt-button-border-colour, 90%);
+  $govuk-alt-button-shadow-colour: $govuk-button-colour;
+  $govuk-alt-button-text-colour: $govuk-button-colour;
+
+  // Secondary button variables
+  $govuk-secondary-button-colour: govuk-colour("grey-3");
+  $govuk-secondary-button-hover-colour: shade($govuk-secondary-button-colour, 10%);
+  $govuk-secondary-button-shadow-colour: shade($govuk-secondary-button-colour, 40%);
+  $govuk-secondary-button-text-colour: govuk-colour("black");
+
+  // Secondary (alt) button variables
+  $govuk-secondary-alt-button-colour: govuk-colour("white");
+  $govuk-secondary-alt-button-border-colour: govuk-colour("grey-1");
+  $govuk-secondary-alt-button-hover-colour: tint($govuk-secondary-alt-button-border-colour, 90%);
+  $govuk-secondary-alt-button-shadow-colour: $govuk-secondary-alt-button-border-colour;
+  $govuk-secondary-alt-button-text-colour: govuk-colour("black");
+
+  // Warning button variables
+  $govuk-warning-button-colour: govuk-colour("red");
+  $govuk-warning-button-hover-colour: shade($govuk-warning-button-colour, 20%);
+  $govuk-warning-button-shadow-colour: shade($govuk-warning-button-colour, 60%);
+  $govuk-warning-button-text-colour: govuk-colour("white");
+
+  // Warning (alt) button variables
+  $govuk-warning-alt-button-colour: govuk-colour("white");
+  $govuk-warning-alt-button-border-colour: govuk-colour("red");
+  $govuk-warning-alt-button-hover-colour: tint($govuk-warning-alt-button-border-colour, 90%);
+  $govuk-warning-alt-button-shadow-colour: $govuk-warning-alt-button-border-colour;
+  $govuk-warning-alt-button-text-colour: govuk-colour("red");
+
+  // Link button variables
+  $govuk-link-button-colour: transparent;
+  $govuk-link-button-hover-colour: govuk-colour("grey-3");
+  $govuk-link-button-text-colour: govuk-colour("blue");
+
+  // Warning link button variables
+  $govuk-warning-link-button-colour: transparent;
+  $govuk-warning-link-button-hover-colour: govuk-colour("grey-3");
+  $govuk-warning-link-button-text-colour: govuk-colour("red");
 
   // Because the shadow (s0) is visually 'part of' the button, we need to reduce
   // the height of the button to compensate by adjusting its padding (s1) and
@@ -175,6 +218,119 @@
   .govuk-button--start {
     padding-top: (govuk-spacing(2) - $govuk-border-width-form-element - ($button-shadow-size / 2) + $offset); // s1
     padding-bottom: (govuk-spacing(2) - $govuk-border-width-form-element - ($button-shadow-size / 2) - $offset + 1); // s1
+  }
+
+  .govuk-button--alt {
+    padding-bottom: 7px;
+    border: 2px solid $govuk-alt-button-border-colour;
+    border-bottom: 1px solid $govuk-alt-button-border-colour;
+    color: $govuk-alt-button-text-colour;
+    background-color: $govuk-alt-button-colour;
+    box-shadow: 0 $button-shadow-size 0 $govuk-alt-button-shadow-colour;
+
+    &:hover,
+    &:focus {
+      color: $govuk-alt-button-text-colour;
+      background-color: $govuk-alt-button-hover-colour;
+    }
+
+    &:focus {
+      border: 2px solid transparent;
+    }
+  }
+
+  .govuk-button--secondary {
+    color: $govuk-secondary-button-text-colour;
+    background-color: $govuk-secondary-button-colour;
+    box-shadow: 0 $button-shadow-size 0 $govuk-secondary-button-shadow-colour;
+
+    &:hover,
+    &:focus {
+      color: $govuk-secondary-button-text-colour;
+      background-color: $govuk-secondary-button-hover-colour;
+    }
+  }
+
+  .govuk-button--secondary-alt {
+    padding-bottom: 7px;
+    border: 2px solid $govuk-secondary-alt-button-border-colour;
+    border-bottom: 1px solid $govuk-secondary-alt-button-border-colour;
+    color: $govuk-secondary-alt-button-text-colour;
+    background-color: $govuk-secondary-alt-button-colour;
+    box-shadow: 0 $button-shadow-size 0 $govuk-secondary-alt-button-shadow-colour;
+
+    &:hover,
+    &:focus {
+      color: $govuk-secondary-alt-button-text-colour;
+      background-color: $govuk-secondary-alt-button-hover-colour;
+    }
+
+    &:focus {
+      border: 2px solid transparent;
+    }
+  }
+
+  .govuk-button--warning {
+    color: $govuk-warning-button-text-colour;
+    background-color: $govuk-warning-button-colour;
+    box-shadow: 0 $button-shadow-size 0 $govuk-warning-button-shadow-colour;
+
+    &:hover,
+    &:focus {
+      color: $govuk-warning-button-text-colour;
+      background-color: $govuk-warning-button-hover-colour;
+    }
+  }
+
+  .govuk-button--warning-alt {
+    padding-bottom: 7px;
+    border: 2px solid $govuk-warning-alt-button-border-colour;
+    border-bottom: 1px solid $govuk-warning-alt-button-border-colour;
+    color: $govuk-warning-alt-button-text-colour;
+    background-color: $govuk-warning-alt-button-colour;
+    box-shadow: 0 $button-shadow-size 0 $govuk-warning-alt-button-shadow-colour;
+
+    &:hover,
+    &:focus {
+      color: $govuk-warning-alt-button-text-colour;
+      background-color: $govuk-warning-alt-button-hover-colour;
+    }
+
+    &:focus {
+      border: 2px solid transparent;
+    }
+  }
+
+  .govuk-button--link {
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    color: $govuk-link-button-text-colour;
+    background-color: $govuk-link-button-colour;
+    box-shadow: none;
+
+    &:hover,
+    &:focus {
+      border-top: 3px solid $govuk-link-button-hover-colour;
+      border-bottom: 3px solid $govuk-link-button-hover-colour;
+      color: $govuk-link-button-text-colour;
+      background-color: $govuk-link-button-hover-colour;
+    }
+  }
+
+  .govuk-button--warning-link {
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    color: $govuk-warning-link-button-text-colour;
+    background-color: $govuk-warning-link-button-colour;
+    box-shadow: none;
+
+    &:hover,
+    &:focus {
+      border-top: 3px solid $govuk-warning-link-button-hover-colour;
+      border-bottom: 3px solid $govuk-warning-link-button-hover-colour;
+      color: $govuk-warning-link-button-text-colour;
+      background-color: $govuk-warning-link-button-hover-colour;
+    }
   }
 
 }
