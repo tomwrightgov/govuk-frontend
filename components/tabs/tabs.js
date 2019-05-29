@@ -746,6 +746,54 @@ if (detect) return
 
 (function(undefined) {
 
+    // Detection from https://github.com/Financial-Times/polyfill-service/pull/1062/files#diff-b09a5d2acf3314b46a6c8f8d0c31b85c
+    var detect = (
+      'Element' in this && "nextElementSibling" in document.documentElement
+    );
+
+    if (detect) return
+
+
+    (function (global) {
+
+      // Polyfill from https://github.com/Financial-Times/polyfill-service/pull/1062/files#diff-404b69b4750d18dea4174930a49170fd
+      Object.defineProperty(Element.prototype, "nextElementSibling", {
+        get: function(){
+          var el = this.nextSibling;
+          while (el && el.nodeType !== 1) { el = el.nextSibling; }
+          return (el.nodeType === 1) ? el : null;
+        }
+      });
+
+    }(this));
+
+}).call('object' === typeof window && window || 'object' === typeof self && self || 'object' === typeof global && global || {});
+
+(function(undefined) {
+
+    // Detection from https://github.com/Financial-Times/polyfill-service/pull/1062/files#diff-a162235fbc9c0dd40d4032265f44942e
+    var detect = (
+      'Element' in this && 'previousElementSibling' in document.documentElement
+    );
+
+    if (detect) return
+
+    (function (global) {
+      // Polyfill from https://github.com/Financial-Times/polyfill-service/pull/1062/files#diff-b45a1197b842728cb76b624b6ba7d739
+      Object.defineProperty(Element.prototype, 'previousElementSibling', {
+        get: function(){
+          var el = this.previousSibling;
+          while (el && el.nodeType !== 1) { el = el.previousSibling; }
+          return (el.nodeType === 1) ? el : null;
+        }
+      });
+
+    }(this));
+
+}).call('object' === typeof window && window || 'object' === typeof self && self || 'object' === typeof global && global || {});
+
+(function(undefined) {
+
 // Detection from https://github.com/Financial-Times/polyfill-service/blob/master/packages/polyfill-library/polyfills/Window/detect.js
 var detect = ('Window' in this);
 
@@ -1193,6 +1241,10 @@ Tabs.prototype.unsetAttributes = function ($tab) {
 };
 
 Tabs.prototype.onTabClick = function (e) {
+  if (!e.target.classList.contains('govuk-tabs__tab')) {
+  // Allow events on child DOM elements to bubble up to tab parent
+    return false
+  }
   e.preventDefault();
   var $newTab = e.target;
   var $currentTab = this.getCurrentTab();
@@ -1232,7 +1284,7 @@ Tabs.prototype.activateNextTab = function () {
   var currentTab = this.getCurrentTab();
   var nextTabListItem = currentTab.parentNode.nextElementSibling;
   if (nextTabListItem) {
-    var nextTab = nextTabListItem.firstElementChild;
+    var nextTab = nextTabListItem.querySelector('.govuk-tabs__tab');
   }
   if (nextTab) {
     this.hideTab(currentTab);
@@ -1246,7 +1298,7 @@ Tabs.prototype.activatePreviousTab = function () {
   var currentTab = this.getCurrentTab();
   var previousTabListItem = currentTab.parentNode.previousElementSibling;
   if (previousTabListItem) {
-    var previousTab = previousTabListItem.firstElementChild;
+    var previousTab = previousTabListItem.querySelector('.govuk-tabs__tab');
   }
   if (previousTab) {
     this.hideTab(currentTab);
