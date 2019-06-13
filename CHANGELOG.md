@@ -6,23 +6,22 @@ See the [versioning documentation for how to update this changelog](./docs/contr
 
 🆕 New features:
 
-- Support custom text on meta title 
-
-  Hard coded 'Support Links' is replaced by `params.meta.visuallyHiddenTitle` this has a default off Support links.
+- You can now override the visually hidden 'Support Links' text in the footer by
+  setting `meta.visuallyHiddenTitle`.
 
   ([PR #1387](https://github.com/alphagov/govuk-frontend/pull/1387))
 
 🔧 Fixes:
 
-- Fixes the color of disabled secondary and warning button variants
+- Disabled secondary and warning buttons now have the correct background colour.
 
   ([PR #1392](https://github.com/alphagov/govuk-frontend/pull/1392))
 
-- Adds missing height and width attributes to the fallback crown PNG in the header.
+- The crown image in the header now has height and width attributes set.
 
   ([PR #1419](https://github.com/alphagov/govuk-frontend/pull/1419))
 
-- Fixes alignment of the fallback crown PNG with 'GOV.UK' in the header in IE8
+- The crown in the header better aligns with 'GOV.UK' in IE8.
 
   ([PR #1419](https://github.com/alphagov/govuk-frontend/pull/1419))
 
