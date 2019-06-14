@@ -1,0 +1,12 @@
+{%- set numericClass = params.numericClasses if params.numericClasses else 'govuk-!-font-weight-bold' %}
+{%- set maxPage = (params.totalRecords|int / params.pageSize) |int %}
+{%- if maxPage * params.pageSize < params.totalRecords %}
+  {%- set maxPage = maxPage + 1 %}
+{%- endif %}
+{%- if maxPage > 1 %}
+<div class="govuk-body{%- if params.classes %} {{ params.classes }}{% else %} govuk-!-font-size-19{% endif %}"
+    {%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
+  Showing <span class="{{ numericClass }}">{{ (params.currentPage-1) * params.pageSize + 1 }}</span> to <span class="{{ numericClass }}">
+  {%- if params.currentPage * params.pageSize > params.totalRecords %}{{ params.totalRecords }}{% else %}{{ params.currentPage * params.pageSize }}{% endif %}</span> of <span class="{{ numericClass }}">{{ params.totalRecords }}</span> {{ params.itemType }}.
+</div>
+{%- endif %}

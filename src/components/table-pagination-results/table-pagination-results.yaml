@@ -1,0 +1,36 @@
+params:
+- name: currentPage
+  type: integer
+  required: true
+  description: Specify which page the user is on.
+- name: totalRecords
+  type: integer
+  required: true
+  description: Specify total number of possible records to view.
+- name: pageSize
+  type: integer
+  required: true
+  description: Specify the number of records on each page.
+- name: classes
+  type: string
+  required: false
+  description: Classes to add to the div tag.
+- name: attributes
+  type: object
+  required: false
+  description: HTML attributes (for example data attributes) to add to the div tag.
+- name: numericClasses
+  type: string
+  required: false
+  description: Classes to add to each number. Default to bold.
+- name: itemType
+  type: string
+  required: true
+  description: Specifies gives the type of the object that is listed. E.g. ‘customers’, ‘claims’, ‘cases’.
+
+examples:
+  - name: default
+    data:
+      currentPage: 3
+      pageSize: 20
+      totalRecords: 100
