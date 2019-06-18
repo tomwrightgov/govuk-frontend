@@ -1,0 +1,52 @@
+
+{%- set maxPage = (params.totalRecords|int / params.pageSize) |int %}
+{%- if maxPage * params.pageSize < params.totalRecords %}
+  {%- set maxPage = maxPage + 1 %}
+{%- endif %}
+{%- set currentPage = params.currentPage|int %}
+{%- if currentPage < 1 %}{%- set currentPage = 1 %}{%- endif %}
+{%- if currentPage > maxPage %}{%- set currentPage = maxPage %}{%- endif %}
+
+{%- if params.totalRecords|int > params.pageSize|int and (currentPage-1) * params.pageSize + 1 <= params.totalRecords|int %}
+<nav class="govuk-pagination govuk-body {{ blockClass }}" aria-label="Pagination">
+  {%- if currentPage != 1 %}
+  <div class="govuk-pagination__previous">
+    <a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int - 1 ) }}" class="govuk-link govuk-link--no-visited-state" rel="previous">
+{{ previousArrow() }}Previous <span class="hidden-mobile">page</span></a>
+  </div>
+  {%- endif %}
+  {%- if currentPage * params.pageSize < params.totalRecords %}
+  <div class="govuk-pagination__next">
+    <a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int + 1 ) }}"  class="govuk-link govuk-link--no-visited-state" rel="next">
+      Next <span class="hidden-mobile">page</span> {{ nextArrow() }}</a>
+  </div>
+  {%- endif %}
+  <div class="dwp-pagination-page-list"><ul>
+    {%- if currentPage >= 3 %}
+    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, 1 ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">Page </span>1</a></li>
+    {%- endif %}
+    {%- if currentPage >= 4 %}
+    <li>…</li>
+    {%- endif %}
+    {%- if currentPage >= 2 %}
+    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int - 1 ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">Page </span>{{ currentPage|int - 1 }}</a></li>
+    {%- endif %}
+
+    <li class="active"><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">Page </span>{{ currentPage|int }}</a></li>
+
+    {%- if currentPage < maxpage %}
+    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int + 1 ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">Page </span>{{ currentPage|int + 1 }}</a></li>
+    {%- endif %}
+
+
+    {%- if currentPage < maxpage -2 %}
+    <li>…</li>
+    {%- endif %}
+
+    {%- if currentPage < maxpage -1 %}
+    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, maxpage ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">Page </span>{{ maxpage }}</a></li>
+    {%- endif %}
+  </ul></div>
+</nav>
+{%- endif %}
+

@@ -1,0 +1,61 @@
+---
+scenario: >-
+  As part of an online service, you are provided with a list of data too large to fit on a single page.
+
+  Things to try:
+
+  1. Try the next and previous links and randon numeric links.
+---
+
+{% extends "_generic.njk" %}
+
+{% from "back-link/macro.njk" import govukBackLink %}
+{% from "table/macro.njk" import govukTable %}
+{% from "table-pagination-results/macro.njk" import govukTablePaginationResults %}
+
+{% set pageTitle = "Table Pagination" %}
+{% block pageTitle %}{{ "Error: " if errors }}{{ pageTitle }} - GOV.UK{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "#"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-heading-xl">
+        Pagination test bed
+      </h1>
+
+      <h2 class="govuk-heading-m">Example table with random data</h2>
+      {{ govukTablePaginationResults(paginationData) }}
+
+      {{ govukTable({
+        firstCellIsHeader: true,
+        head: [
+          {
+            text: "Nino"
+          },
+          {
+            text: "Name"
+          },
+          {
+            text: "Address"
+          },
+          {
+            text: "Date of birth"
+          },
+          {
+            text: "Claim",
+            format: "numeric"
+          }
+        ],
+        rows: records
+      }) }}
+
+    </div>
+</div>
+{% endblock %}

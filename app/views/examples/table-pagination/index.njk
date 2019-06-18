@@ -1,0 +1,32 @@
+{% from "back-link/macro.njk" import govukBackLink %}
+{% from "table-pagination-results/macro.njk" import govukTablePaginationResults %}
+{% from "table-pagination-control/macro.njk" import govukTablePaginationControl %}
+
+{% extends "layout.njk" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    "href": "/"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">
+        Table Pagination
+      </h1>
+
+
+      <section class="govuk-!-margin-top-8">
+        <h2 class="govuk-heading-l">XXX2</h2>
+        {{ govukTablePaginationResults({"currentPage": 1,"pageSize": 20,"totalRecords": 100,"itemType": "records"}) }}
+        {{ govukTablePaginationControl({"currentPage": 1,"pageSize": 20,"totalRecords": 100}) }}
+      </section>
+
+    </div>
+  </div>
+{% endblock %}

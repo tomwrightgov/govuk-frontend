@@ -1,0 +1,114 @@
+@import "../../settings/all";
+@import "../../tools/all";
+@import "../../helpers/all";
+
+.govuk-pagination {
+  margin-top: 0;
+  padding-top: 15px;
+  overflow: hidden;
+
+  .visuallyhidden {
+    position: absolute;
+    top: auto;
+    left: -9999em;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    border: 0;
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: 767px) {
+    .hidden-mobile {
+      display: none !important;
+      visibility: hidden !important;
+    }
+  }
+
+  .govuk-pagination__previous {
+    float: left;
+    text-align: left;
+  }
+
+  .govuk-link:hover {
+    text-decoration: underline;
+  }
+
+  .govuk-pagination__next,
+  .govuk-pagination__previous {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+
+  .govuk-pagination__previous a svg {
+    margin-right: 7px;
+  }
+
+  .govuk-pagination__next a svg {
+    margin-left: 7px;
+  }
+
+  .govuk-pagination__next {
+    float: right;
+    text-align: right;
+  }
+
+  .govuk-pagination__next,
+  .govuk-pagination__previous {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+
+  .govuk-pagination__next a,
+  .govuk-pagination__previous a {
+    text-decoration: none;
+  }
+}
+
+.dwp-pagination-page-list {
+  margin: 0 auto;
+  text-align: center;
+
+  ul {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  ul > li {
+    padding-left: 0;
+  }
+
+  ul li {
+    display: inline-block;
+  }
+
+  ul > li:first-child > a {
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  ul > li > a {
+    padding: 4px 12px;
+    line-height: 20px;
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 767px) {
+    ul > li > a {
+      padding: 4px 8px;
+    }
+  }
+
+  ul > .active span,
+  ul > .active a {
+    color: $govuk-secondary-text-colour;
+    background: transparent;
+    cursor: default;
+  }
+}

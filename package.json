@@ -113,5 +113,8 @@
     "snapshotSerializers": [
       "jest-serializer-html"
     ]
+  },
+  "dependencies": {
+    "chance": "^1.0.18"
   }
 }
