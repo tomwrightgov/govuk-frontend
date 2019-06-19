@@ -9,8 +9,8 @@
   "scripts": {
     "preinstall": "node bin/check-nvmrc.js",
     "prestart": "node bin/check-nvmrc.js",
-    "start": "node ./app/start.js",
-    "heroku": "node ./app/start.js",
+    "start": "node app/start.js",
+    "heroku": "ulp copy-assets && gulp sassdoc && node app/start.js",
     "startgulp": "gulp dev",
     "dont-use-heroku": "gulp copy-assets && gulp sassdoc && node app/start.js",
     "pre-release": "node bin/check-nvmrc.js && ./bin/pre-release.sh",
@@ -23,10 +23,11 @@
     "test:build:package": "jest tasks/gulp/__tests__/after-build-package.test.js",
     "test:build:dist": "jest tasks/gulp/__tests__/after-build-dist.test.js"
   },
-  "devDependencies": {
+  "dependencies": {
     "acorn": "^6.1.1",
     "autoprefixer": "^9.5.1",
     "body-parser": "^1.18.3",
+    "chance": "^1.0.18",
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "^1.4.4",
     "cssnano": "^4.1.10",
@@ -115,8 +116,5 @@
     "snapshotSerializers": [
       "jest-serializer-html"
     ]
-  },
-  "dependencies": {
-    "chance": "^1.0.18"
   }
 }
