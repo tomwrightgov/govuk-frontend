@@ -14,7 +14,7 @@
   "src": "src/",
     "components": "src/components/",
   "ports": {
-    "app": 3800,
+    "app": 80,
     "test": 8888
   }
 }
