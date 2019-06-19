@@ -22,9 +22,21 @@
 
 
       <section class="govuk-!-margin-top-8">
-        <h2 class="govuk-heading-l">XXX2</h2>
-        {{ govukTablePaginationResults({"currentPage": 1,"pageSize": 20,"totalRecords": 100,"itemType": "records"}) }}
+        <h2 class="govuk-heading-l">First page of five</h2>
+        {{ govukTablePaginationResults({"currentPage": 1,"pageSize": 20,"totalRecords": 100,"textItemType": "records"}) }}
         {{ govukTablePaginationControl({"currentPage": 1,"pageSize": 20,"totalRecords": 100}) }}
+      </section>
+
+      <section class="govuk-!-margin-top-8">
+        <h2 class="govuk-heading-l">Middle page of one hundred</h2>
+        {{ govukTablePaginationResults({"currentPage": 50,"pageSize": 10,"totalRecords": 1000,"textItemType": "records"}) }}
+        {{ govukTablePaginationControl({"currentPage": 50,"pageSize": 10,"totalRecords": 1000}) }}
+      </section>
+
+      <section class="govuk-!-margin-top-8">
+        <h2 class="govuk-heading-l">Last page of one hundred</h2>
+        {{ govukTablePaginationResults({"currentPage": 100,"pageSize": 10,"totalRecords": 1000,"textItemType": "records"}) }}
+        {{ govukTablePaginationControl({"currentPage": 100,"pageSize": 10,"totalRecords": 1000}) }}
       </section>
 
     </div>

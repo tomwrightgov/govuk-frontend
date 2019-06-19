@@ -1,84 +1,93 @@
-const Chance = require('chance');
-const chance = new Chance(12345);
+const Chance = require('chance')
+const chance = new Chance(12345)
 
-const pageSize = 10;
-let randomListData = null;
+const pageSize = 10
+let randomListData = null
 
-function generateRandomDataForList() {
+function generateRandomDataForList () {
   randomListData = {
     pageSize,
     totalRecords: chance.integer({ min: 200, max: 1000 }),
-    records: [],
-  };
+    records: []
+  }
 
   for (let i = 0; i < randomListData.totalRecords; i++) {
     randomListData.records.push({
       id: chance.ssn(),
-      name: chance.name({ nationality: 'en' }),
+      firstName: chance.first({ nationality: 'en' }),
+      lastName: chance.last({ nationality: 'en' }),
       address: chance.address(),
       dob: chance.birthday({ string: true, american: false }),
-      claim: `£${chance.floating({ min: 50, max: 15000, fixed: 2 })}`,
-    });
+      claim: `£${chance.floating({ min: 50, max: 15000, fixed: 2 })}`
+    })
   }
 
+  randomListData.records = randomListData.records.sort((a, b) =>
+    `${a.lastName}, ${a.firstName}`.localeCompare(
+      `${b.lastName}, ${b.firstName}`
+    )
+  )
+
   randomListData.maxPage = Math.ceil(
-    randomListData.totalRecords / randomListData.pageSize,
-  );
+    randomListData.totalRecords / randomListData.pageSize
+  )
 }
 
-function dataForpage(page) {
+function dataForpage (page) {
   if (!randomListData) {
-    generateRandomDataForList();
+    generateRandomDataForList()
   }
 
   if (!page || page < 0) {
-    page = 1;
+    page = 1
   } else if (page > randomListData.maxPage) {
-    page = randomListData.maxPage;
+    page = randomListData.maxPage
   }
 
-  const firstRecordOffset = (page - 1) * randomListData.pageSize;
+  const firstRecordOffset = (page - 1) * randomListData.pageSize
 
   return {
     paginationData: {
       pageSize: randomListData.pageSize,
       totalRecords: randomListData.totalRecords,
       currentPage: page,
-      itemType: 'records'
+      textItemType: 'records'
     },
     records: randomListData.records
       .slice(firstRecordOffset, firstRecordOffset + randomListData.pageSize)
       .map(v => {
         return [
           {
-            text: v.id,
+            text: v.id
           },
           {
-            text: v.name,
+            text: `${v.firstName} ${v.lastName}`
           },
           {
-            text: v.address,
+            text: v.address
           },
           {
-            text: v.dob,
+            text: v.dob
           },
           {
             text: v.claim,
-            format: 'numeric',
-          },
-        ];
+            format: 'numeric'
+          }
+        ]
       }),
-    searchTerm: 'active-customers',
-  };
+    searchTerm: 'active-customers'
+  }
 }
 
-module.exports = (app) => {
+module.exports = app => {
   app.get(
     '/full-page-examples/customer-table-pagination',
     (request, response) => {
-      let currentPage = request.query.page;
-      response.render('./full-page-examples/customer-table-pagination/index', dataForpage(currentPage))
+      let currentPage = request.query.page
+      response.render(
+        './full-page-examples/customer-table-pagination/index',
+        dataForpage(currentPage)
+      )
     }
   )
 }
-

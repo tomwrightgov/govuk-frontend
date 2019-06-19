@@ -1,3 +1,17 @@
+{%- macro paginationPageLink(queryPrefix,queryPostfix,page) %}{{ queryPrefix }}{{ page }}{{ queryPostfix }}{% endmacro %}
+
+{%- macro previousArrow() %}
+<svg xmlns="http://www.w3.org/2000/svg" height="13" width="17" viewBox="0 0 17 13"><path fill="currentColor" d="M6.6,0l-6.7,6.7l6.7,6.4L8,11.7l-4.2-4h12.9v-2h-13L8,1.4C8,1.4,6.6,0,6.6,0z"></path></svg>
+{% endmacro %}
+
+{%- macro nextArrow() %}
+<svg xmlns="http://www.w3.org/2000/svg" height="13" width="17" viewBox="0 0 17 13"><path fill="currentColor" d="M10.1,0L8.7,1.4L13,5.7H0v2h12.9l-4.2,4l1.4,1.4l6.7-6.4L10.1,0z"></path></svg>
+{% endmacro %}
+
+{%- set textPrevious = params.textPrevious if params.textPrevious else 'Previous' %}
+{%- set textPage = params.textPage if params.textPage else 'Page' %}
+{%- set textpage = params.textpage if params.textpage else 'page' %}
+{%- set textNext = params.textNext if params.textNext else 'Next' %}
 
 {%- set maxPage = (params.totalRecords|int / params.pageSize) |int %}
 {%- if maxPage * params.pageSize < params.totalRecords %}
@@ -6,47 +20,55 @@
 {%- set currentPage = params.currentPage|int %}
 {%- if currentPage < 1 %}{%- set currentPage = 1 %}{%- endif %}
 {%- if currentPage > maxPage %}{%- set currentPage = maxPage %}{%- endif %}
+{%- set queryPrefix = params.queryPrefix if params.queryPrefix else "?page=" %}
+{%- set queryPostfix = params.queryPostfix if params.queryPostfix else "" %}
+{%- if params.totalRecords|int > params.pageSize|int and (currentPage-1) * params.pageSize + 1 <= params.totalRecords|int -%}
 
-{%- if params.totalRecords|int > params.pageSize|int and (currentPage-1) * params.pageSize + 1 <= params.totalRecords|int %}
-<nav class="govuk-pagination govuk-body {{ blockClass }}" aria-label="Pagination">
-  {%- if currentPage != 1 %}
-  <div class="govuk-pagination__previous">
-    <a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int - 1 ) }}" class="govuk-link govuk-link--no-visited-state" rel="previous">
-{{ previousArrow() }}Previous <span class="hidden-mobile">page</span></a>
-  </div>
-  {%- endif %}
-  {%- if currentPage * params.pageSize < params.totalRecords %}
-  <div class="govuk-pagination__next">
-    <a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int + 1 ) }}"  class="govuk-link govuk-link--no-visited-state" rel="next">
-      Next <span class="hidden-mobile">page</span> {{ nextArrow() }}</a>
-  </div>
-  {%- endif %}
+<nav class="govuk-pagination govuk-body{%- if params.classes %} {{ params.classes }}{% else %} govuk-!-font-size-19{% endif %}" aria-label="Pagination"
+{%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
+{%- if currentPage != 1 -%}
+<div class="govuk-pagination__previous"><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int - 1 ) }}" class="govuk-link govuk-link--no-visited-state" rel="previous">
+{{ previousArrow() }}{{ textPrevious }} <span class="hidden-mobile">{{ textpage }}</span></a></div>
+{%- endif %}
+
+{%- if currentPage * params.pageSize < params.totalRecords %}
+
+<div class="govuk-pagination__next"><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int + 1 ) }}"  class="govuk-link govuk-link--no-visited-state" rel="next">{{ textNext }} <span class="hidden-mobile">{{ textpage }}</span> {{ nextArrow() }}</a></div>
+{%- endif %}
+
   <div class="dwp-pagination-page-list"><ul>
     {%- if currentPage >= 3 %}
-    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, 1 ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">Page </span>1</a></li>
-    {%- endif %}
+    
+    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, 1 ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">{{ textPage }} </span>1</a></li>
+    {%- endif -%}
+
     {%- if currentPage >= 4 %}
+    
     <li>…</li>
     {%- endif %}
+
     {%- if currentPage >= 2 %}
-    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int - 1 ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">Page </span>{{ currentPage|int - 1 }}</a></li>
+    
+    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int - 1 ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">{{ textPage }} </span>{{ currentPage|int - 1 }}</a></li>
     {%- endif %}
 
-    <li class="active"><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">Page </span>{{ currentPage|int }}</a></li>
+    <li class="active"><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">{{ textPage }} </span>{{ currentPage|int }}</a></li>
 
-    {%- if currentPage < maxpage %}
-    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int + 1 ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">Page </span>{{ currentPage|int + 1 }}</a></li>
+    {%- if currentPage < maxPage %}
+    
+    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int + 1 ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">{{ textPage }} </span>{{ currentPage|int + 1 }}</a></li>
     {%- endif %}
 
-
-    {%- if currentPage < maxpage -2 %}
+    {%- if currentPage < maxPage -2 %}
+    
     <li>…</li>
     {%- endif %}
 
-    {%- if currentPage < maxpage -1 %}
-    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, maxpage ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">Page </span>{{ maxpage }}</a></li>
+    {%- if currentPage < maxPage -1 %}
+    
+    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, maxPage ) }}" class="govuk-link govuk-link--no-visited-state"><span class="visuallyhidden">{{ textPage }} </span>{{ maxPage }}</a></li>
     {%- endif %}
+
   </ul></div>
 </nav>
 {%- endif %}
-

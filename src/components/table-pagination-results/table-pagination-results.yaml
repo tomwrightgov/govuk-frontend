@@ -22,11 +22,23 @@ params:
 - name: numericClasses
   type: string
   required: false
-  description: Classes to add to each number. Default to bold.
-- name: itemType
+  description: Classes to add to each number. Defaults to bold.
+- name: textItemType
   type: string
   required: true
-  description: Specifies gives the type of the object that is listed. E.g. ‘customers’, ‘claims’, ‘cases’.
+  description: Specifies the type of the object that is listed. E.g. ‘customers’, ‘claims’, ‘cases’.
+- name: textShowing
+  type: string
+  required: optional
+  description: Specifies the word to use for 'Showing'. Used for translation into Welsh.
+- name: textTo
+  type: string
+  required: optional
+  description: Specifies the word to use for 'to'. Used for translation into Welsh.
+- name: textOf
+  type: string
+  required: optional
+  description: Specifies the word to use for 'of'. Used for translation into Welsh.
 
 examples:
   - name: default
@@ -34,30 +46,30 @@ examples:
       currentPage: 3
       pageSize: 20
       totalRecords: 100
-      itemType: 'customers'
+      textItemType: 'customers'
   - name: emptyDataSet
     data:
       currentPage: 1
       pageSize: 20
       totalRecords: 0
-      itemType: 'test empty'
+      textItemType: 'test empty'
   - name: singlePageOfData
     data:
       currentPage: 100
       pageSize: 20
       totalRecords: 15
-      itemType: 'single page'
+      textItemType: 'single page'
   - name: twoPagesOfData
     data:
       currentPage: 2
       pageSize: 10
       totalRecords: 15
-      itemType: 'records'
+      textItemType: 'records'
   - name: pageOneHundered
     data:
       currentPage: 100
       pageSize: 10
       totalRecords: 100
-      itemType: 'records'
+      textItemType: 'records'
 
 

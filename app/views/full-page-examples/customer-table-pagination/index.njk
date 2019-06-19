@@ -12,6 +12,7 @@ scenario: >-
 {% from "back-link/macro.njk" import govukBackLink %}
 {% from "table/macro.njk" import govukTable %}
 {% from "table-pagination-results/macro.njk" import govukTablePaginationResults %}
+{% from "table-pagination-control/macro.njk" import govukTablePaginationControl %}
 
 {% set pageTitle = "Table Pagination" %}
 {% block pageTitle %}{{ "Error: " if errors }}{{ pageTitle }} - GOV.UK{% endblock %}
@@ -56,6 +57,7 @@ scenario: >-
         rows: records
       }) }}
 
+      {{ govukTablePaginationControl(paginationData) }}
     </div>
 </div>
 {% endblock %}

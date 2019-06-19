@@ -19,14 +19,30 @@ params:
   type: object
   required: false
   description: HTML attributes (for example data attributes) to add to the div tag.
-- name: numericClasses
+- name: queryPrefix
   type: string
   required: false
-  description: Classes to add to each number. Default to bold.
-- name: itemType
+  description: The string to prefix to the page number to create the link. Default to "?page=".
+- name: queryPostfix
   type: string
-  required: true
-  description: Specifies gives the type of the object that is listed. E.g. ‘customers’, ‘claims’, ‘cases’.
+  required: false
+  description: The string to postfix to the page number to create the link. Default to a blank string.
+- name: textPrevious
+  type: string
+  required: optional
+  description: Specifies the word to use for 'Previous'. Used for translation into Welsh.
+- name: textNext
+  type: string
+  required: optional
+  description: Specifies the word to use for 'Next'. Used for translation into Welsh.
+- name: textPage
+  type: string
+  required: optional
+  description: Specifies the word to use for 'Page'. Used for translation into Welsh.
+- name: textpage
+  type: string
+  required: optional
+  description: Specifies the word to use for 'page'. Used for translation into Welsh.
 
 examples:
   - name: default

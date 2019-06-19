@@ -31,31 +31,31 @@ describe('Table-Pagination-Control', () => {
 
   it('renders the default example with text', () => {
     const $ = render('table-pagination-control', examples.default)
-    const outputText = $('.govuk-body').text().trim()
-    expect(outputText).toEqual('Showing 41 to 60 of 100 customers.')
+    const outputText = $('.govuk-body').text().replace(/\s+/g, ' ').trim()
+    expect(outputText).toEqual('Previous page Next page Page 1 Page 2 Page 3 Page 4 Page 5')
   })
 
   it('renders the empty data set', () => {
     const $ = render('table-pagination-control', examples.emptyDataSet)
-    const outputText = $('.govuk-body').text().trim()
+    const outputText = $('.govuk-body').text().replace(/\s+/g, ' ').trim()
     expect(outputText).toEqual('')
   })
 
   it('renders a blank for single page ', () => {
     const $ = render('table-pagination-control', examples.singlePageOfData)
-    const outputText = $('.govuk-body').text().trim()
+    const outputText = $('.govuk-body').text().replace(/\s+/g, ' ').trim()
     expect(outputText).toEqual('')
   })
 
   it('renders a two data pages', () => {
     const $ = render('table-pagination-control', examples.twoPagesOfData)
-    const outputText = $('.govuk-body').text().trim()
-    expect(outputText).toEqual('Showing 11 to 15 of 15 records.')
+    const outputText = $('.govuk-body').text().replace(/\s+/g, ' ').trim()
+    expect(outputText).toEqual('Previous page Page 1 Page 2')
   })
 
   it('renders page 100 of 100', () => {
     const $ = render('table-pagination-control', examples.pageOneHundered)
-    const outputText = $('.govuk-body').text().trim()
-    expect(outputText).toEqual('Showing 91 to 100 of 100 records.')
+    const outputText = $('.govuk-body').text().replace(/\s+/g, ' ').trim()
+    expect(outputText).toEqual('Previous page Page 1 … Page 9 Page 10')
   })
 })
