@@ -70,7 +70,41 @@
   }
 }
 
-.dwp-pagination-page-list {
+.dwp-pagination__div-list {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dwp-pagination__list {
+  display: inline-block;
+  margin: 0 10px;
+  padding-inline-start: 0;
+}
+
+.dwp-pagination__list-item {
+  display: inline-block;
+  padding-left: 0;
+}
+
+.dwp-pagination__list-item-link {
+  padding: 4px 12px;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.dwp-pagination__list-item:first-child > a {
+  border-left-width: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.dwp-pagination__list-item-active-link {
+  color: $govuk-secondary-text-colour;
+  background: transparent;
+  cursor: default;
+}
+
+.xxx-dwp-pagination__list {
   margin: 0 auto;
   text-align: center;
 

@@ -36,39 +36,39 @@
 <div class="govuk-pagination__next"><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int + 1 ) }}"  class="govuk-link govuk-link--no-visited-state govuk-pagination__link" rel="next">{{ textNext | safe }} <span class="govuk-pagination__span--hidden-mobile">{{ textpage | safe }}</span> {{ nextArrow() }}</a></div>
 {%- endif %}
 
-  <div class="dwp-pagination-page-list"><ul>
+  <div class="dwp-pagination__div-list"><ul class="dwp-pagination__list">
     {%- if currentPage >= 3 %}
     
-    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, 1 ) }}" class="govuk-link govuk-link--no-visited-state"><span class="govuk-pagination__span--visuallyhidden">{{ textPage | safe }} </span>1</a></li>
+    <li class="dwp-pagination__list-item"><a href="{{ paginationPageLink(queryPrefix,queryPostfix, 1 ) }}" class="govuk-link govuk-link--no-visited-state dwp-pagination__list-item-link"><span class="govuk-pagination__span--visuallyhidden">{{ textPage | safe }} </span>1</a></li>
     {%- endif -%}
 
     {%- if currentPage >= 4 %}
     
-    <li>…</li>
+    <li class="dwp-pagination__list-item">…</li>
     {%- endif %}
 
     {%- if currentPage >= 2 %}
     
-    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int - 1 ) }}" class="govuk-link govuk-link--no-visited-state"><span class="govuk-pagination__span--visuallyhidden">{{ textPage | safe }} </span>{{ currentPage|int - 1 }}</a></li>
+    <li class="dwp-pagination__list-item"><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int - 1 ) }}" class="govuk-link govuk-link--no-visited-state dwp-pagination__list-item-link"><span class="govuk-pagination__span--visuallyhidden">{{ textPage | safe }} </span>{{ currentPage|int - 1 }}</a></li>
     {%- endif %}
 
-    <li class="active"><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int ) }}" class="govuk-link govuk-link--no-visited-state"><span class="govuk-pagination__span--visuallyhidden">{{ textPage | safe }} </span>{{ currentPage|int }}</a></li>
+    <li class="dwp-pagination__list-item"><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int ) }}" class="govuk-link govuk-link--no-visited-state dwp-pagination__list-item-link dwp-pagination__list-item-active-link"><span class="govuk-pagination__span--visuallyhidden dwp-pagination__list-item-active-link">{{ textPage | safe }} </span>{{ currentPage|int }}</a></li>
 
     {%- if currentPage < maxPage %}
     
-    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int + 1 ) }}" class="govuk-link govuk-link--no-visited-state"><span class="govuk-pagination__span--visuallyhidden">{{ textPage | safe }} </span>{{ currentPage|int + 1 }}</a></li>
+    <li class="dwp-pagination__list-item"><a href="{{ paginationPageLink(queryPrefix,queryPostfix, currentPage|int + 1 ) }}" class="govuk-link govuk-link--no-visited-state dwp-pagination__list-item-link"><span class="govuk-pagination__span--visuallyhidden">{{ textPage | safe }} </span>{{ currentPage|int + 1 }}</a></li>
     {%- endif %}
 
     {%- if currentPage < maxPage -2 %}
     
-    <li>…</li>
+    <li class="dwp-pagination__list-item">…</li>
     {%- endif %}
 
     {%- if currentPage < maxPage -1 %}
     
-    <li><a href="{{ paginationPageLink(queryPrefix,queryPostfix, maxPage ) }}" class="govuk-link govuk-link--no-visited-state"><span class="govuk-pagination__span--visuallyhidden">{{ textPage | safe }} </span>{{ maxPage }}</a></li>
+    <li class="dwp-pagination__list-item"><a href="{{ paginationPageLink(queryPrefix,queryPostfix, maxPage ) }}" class="govuk-link govuk-link--no-visited-state dwp-pagination__list-item-link"><span class="govuk-pagination__span--visuallyhidden">{{ textPage | safe }} </span>{{ maxPage }}</a></li>
     {%- endif %}
-
+    
   </ul></div>
 </nav>
 {%- endif %}
