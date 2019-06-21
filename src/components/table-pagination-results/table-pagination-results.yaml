@@ -71,5 +71,12 @@ examples:
       pageSize: 10
       totalRecords: 100
       textItemType: 'records'
-
-
+  - name: welsh
+    data:
+      currentPage: 3
+      pageSize: 20
+      totalRecords: 100
+      textItemType: 'o gofnodion'
+      textShowing: 'Yn dangos'
+      textTo: 'i'
+      textOf: 'o'

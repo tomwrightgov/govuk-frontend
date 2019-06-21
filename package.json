@@ -12,7 +12,6 @@
     "start": "node app/start.js",
     "heroku": "gulp copy-assets && gulp sassdoc && node app/start.js",
     "startgulp": "gulp dev",
-    "dont-use-heroku": "gulp copy-assets && gulp sassdoc && node app/start.js",
     "pre-release": "node bin/check-nvmrc.js && ./bin/pre-release.sh",
     "release": "node bin/check-nvmrc.js && ./bin/release.sh",
     "release-to-branch": "node bin/check-nvmrc.js && ./bin/release-to-branch.sh",

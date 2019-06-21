@@ -58,4 +58,10 @@ describe('Table-Pagination-Results', () => {
     const outputText = $('.govuk-body').text().trim()
     expect(outputText).toEqual('Showing 91 to 100 of 100 records.')
   })
+
+  it('renders Welsh', () => {
+    const $ = render('table-pagination-results', examples.welsh)
+    const outputText = $('.govuk-body').text().replace(/\s+/g, ' ').trim()
+    expect(outputText).toEqual('Yn dangos 41 i 60 o 100 o gofnodion.')
+  })
 })

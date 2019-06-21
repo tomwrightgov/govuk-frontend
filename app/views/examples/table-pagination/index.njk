@@ -39,6 +39,12 @@
         {{ govukTablePaginationControl({"currentPage": 100,"pageSize": 10,"totalRecords": 1000}) }}
       </section>
 
+      <section class="govuk-!-margin-top-8">
+        <h2 class="govuk-heading-l">Welsh</h2>
+        {{ govukTablePaginationResults({"currentPage": 3,"pageSize": 10,"totalRecords": 100,"textItemType": "o gofnodion","textShowing": "Yn dangos","textTo": "i","textOf": "o"}) }}
+        {{ govukTablePaginationControl({"currentPage": 3,"pageSize": 10,"totalRecords": 100,"textPrevious": "Tudalen flaenorol","textNext": "Tudalen nesaf","textPage": "Tudalen","textpage": "&nbsp;"}) }}
+      </section>
+
     </div>
   </div>
 {% endblock %}

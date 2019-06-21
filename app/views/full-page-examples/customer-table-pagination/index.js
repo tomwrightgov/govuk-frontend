@@ -33,7 +33,7 @@ function generateRandomDataForList () {
   )
 }
 
-function dataForpage (page) {
+function dataForpage (page, language) {
   if (!randomListData) {
     generateRandomDataForList()
   }
@@ -46,13 +46,39 @@ function dataForpage (page) {
 
   const firstRecordOffset = (page - 1) * randomListData.pageSize
 
+  const paginationData = {
+    pageSize: randomListData.pageSize,
+    totalRecords: randomListData.totalRecords,
+    currentPage: page,
+    textItemType: 'records'
+  }
+
+  let languageSwitch;
+
+  if (language === 'cy') {
+    paginationData.textPrevious = 'Tudalen flaenorol'
+    paginationData.textNext = 'Tudalen nesaf'
+    paginationData.textPage = 'Tudalen'
+    paginationData.textpage = '&nbsp;'
+    paginationData.textItemType = 'o gofnodion'
+    paginationData.textShowing = 'Yn dangos'
+    paginationData.textTo = 'i'
+    paginationData.textOf ='o'
+    paginationData.queryPostfix = '&lang=cy';
+    languageSwitch = {
+      text: 'Change language to English',
+      url: `?page=${page}&lang=en`
+    }
+  } else {
+    languageSwitch = {
+      text: 'Change language to Welsh',
+      url: `?page=${page}&lang=cy`
+    }
+  }
+ 
   return {
-    paginationData: {
-      pageSize: randomListData.pageSize,
-      totalRecords: randomListData.totalRecords,
-      currentPage: page,
-      textItemType: 'records'
-    },
+    paginationData,
+    languageSwitch,
     records: randomListData.records
       .slice(firstRecordOffset, firstRecordOffset + randomListData.pageSize)
       .map(v => {
@@ -74,8 +100,7 @@ function dataForpage (page) {
             format: 'numeric'
           }
         ]
-      }),
-    searchTerm: 'active-customers'
+      })
   }
 }
 
@@ -83,10 +108,11 @@ module.exports = app => {
   app.get(
     '/full-page-examples/customer-table-pagination',
     (request, response) => {
-      let currentPage = request.query.page
+      const currentPage = request.query.page
+      const language = request.query.lang ? request.query.lang : '';
       response.render(
         './full-page-examples/customer-table-pagination/index',
-        dataForpage(currentPage)
+        dataForpage(currentPage,language)
       )
     }
   )

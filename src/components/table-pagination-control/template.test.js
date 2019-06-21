@@ -58,4 +58,10 @@ describe('Table-Pagination-Control', () => {
     const outputText = $('.govuk-body').text().replace(/\s+/g, ' ').trim()
     expect(outputText).toEqual('Previous page Page 1 … Page 9 Page 10')
   })
+
+  it('renders Welsh', () => {
+    const $ = render('table-pagination-control', examples.welsh)
+    const outputText = $('.govuk-body').text().replace(/\s+/g, ' ').trim()
+    expect(outputText).toEqual('Tudalen flaenorol Tudalen nesaf Tudalen 1 Tudalen 2 Tudalen 3 Tudalen 4 Tudalen 5')
+  })
 })

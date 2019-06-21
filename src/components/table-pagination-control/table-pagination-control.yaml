@@ -75,5 +75,13 @@ examples:
       pageSize: 10
       totalRecords: 100
       itemType: 'records'
-
+  - name: welsh
+    data:
+      currentPage: 3
+      pageSize: 20
+      totalRecords: 100
+      textPrevious: 'Tudalen flaenorol'
+      textNext: 'Tudalen nesaf'
+      textPage: 'Tudalen'
+      textpage: '&nbsp;'
 
