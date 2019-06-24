@@ -53,7 +53,7 @@ function dataForpage (page, language) {
     textItemType: 'records'
   }
 
-  let languageSwitch;
+  let languageSwitch
 
   if (language === 'cy') {
     paginationData.textPrevious = 'Tudalen flaenorol'
@@ -63,8 +63,9 @@ function dataForpage (page, language) {
     paginationData.textItemType = 'o gofnodion'
     paginationData.textShowing = 'Yn dangos'
     paginationData.textTo = 'i'
-    paginationData.textOf ='o'
-    paginationData.queryPostfix = '&lang=cy';
+    paginationData.textOf = 'o'
+    paginationData.queryPostfix = '&lang=cy'
+
     languageSwitch = {
       text: 'Change language to English',
       url: `?page=${page}&lang=en`
@@ -75,7 +76,6 @@ function dataForpage (page, language) {
       url: `?page=${page}&lang=cy`
     }
   }
- 
   return {
     paginationData,
     languageSwitch,
@@ -109,10 +109,10 @@ module.exports = app => {
     '/full-page-examples/customer-table-pagination',
     (request, response) => {
       const currentPage = request.query.page
-      const language = request.query.lang ? request.query.lang : '';
+      const language = request.query.lang ? request.query.lang : ''
       response.render(
         './full-page-examples/customer-table-pagination/index',
-        dataForpage(currentPage,language)
+        dataForpage(currentPage, language)
       )
     }
   )
